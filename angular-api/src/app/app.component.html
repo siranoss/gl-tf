@@ -334,14 +334,14 @@
   <div>
 
     <input type="file" id="pickerData" name="fileList" webkitdirectory multiple/>
-      <button type="button" class="btn btn-success btn-block" onClick="uploadData()">Upload</button>
+      <button type="button" class="btn btn-success btn-block" (click)="uploadData()">Upload</button>
 
   </div>
 
   <div>
 
     <input type="file" id="pickerScript" name="fileList" webkitdirectory multiple/>
-      <button type="button" class="btn btn-success btn-block" onClick="uploadScript()">Upload</button>
+      <button type="button" class="btn btn-success btn-block" (click)="uploadScript()">Upload</button>
 
   </div>
 
@@ -351,51 +351,7 @@
 
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-  let pickerScript = document.getElementById('pickerScript');
-  var evtScript;
-  picker.addEventListener('change', e => {
-    for (let file of Array.from(e.target.files)) {
-      let item = document.createElement('li');
-      item.textContent = file.webkitRelativePath;
-    };
-    evtScript = e;
-  });
 
-  function uploadScript() {
-    const data = new FormData();
-    for(var x = 0; x<evt.target.files.length; x++) {
-      data.append('file', evtScript.target.files[x]);
-    }
-    axios.post("Bend address", data, {
-    })
-    .then(res => {
-      console.log(res.statusText);
-    });
-  }
-
-  let pickerData = document.getElementById('pickerData');
-  var evtData;
-  picker.addEventListener('change', e => {
-    for (let file of Array.from(e.target.files)) {
-      let item = document.createElement('li');
-      item.textContent = file.webkitRelativePath;
-    };
-    evtData = e;
-  });
-
-  function uploadData() {
-    const data = new FormData();
-    for(var x = 0; x<evtData.target.files.length; x++) {
-      data.append('file', evtData.target.files[x]);
-    }
-    axios.post("Bend address", data, {
-    })
-    .then(res => {
-      console.log(res.statusText);
-    });
-  }
-</script>
 </html>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
