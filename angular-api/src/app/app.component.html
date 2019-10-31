@@ -333,14 +333,14 @@
 
   <div>
 
-    <input type="file" id="pickerData" name="fileList" webkitdirectory multiple/>
+    <input type="file" id="pickerData"(change)="onFileChangeData($event)" name="fileList"/>
       <button type="button" class="btn btn-success btn-block" (click)="uploadData()">Upload</button>
 
   </div>
 
   <div>
 
-    <input type="file" id="pickerScript" name="fileList" webkitdirectory multiple/>
+    <input type="file" id="pickerScript" (change)="onFileChangeScript($event)" name="fileList" multiple/>
       <button type="button" class="btn btn-success btn-block" (click)="uploadScript()">Upload</button>
 
   </div>
