@@ -14,8 +14,6 @@ interface HTMLInputEvent extends Event {
 })
 export class AppComponent implements AfterViewInit{
   title = 'angular-api';
-  @ViewChild('pickerData',{static:false}) pickerData = ElementRef;
-  @ViewChild('pickerScript',{static:false}) pickerScript = ElementRef;
   evtData : HTMLInputEvent;
   evtScript : HTMLInputEvent;
 
@@ -31,25 +29,16 @@ export class AppComponent implements AfterViewInit{
     this.evtScript = event;
   }
 
-  uploadData() {
-
+  upload(source) {
+    var evt;
+    if (source == "data")
+      evt = this.evtData;
+    else 
+      evt = this.evtScript;
     const data = new FormData();
-    for(var x = 0; x<this.evtData.target.files.length; x++) {
-      data.append('file', this.evtData.target.files[x]);
-      console.log(this.evtData.target.files[x]);
-    }
-    axios.post("http://localhost:8000/upload", data, {
-    })
-    .then(res => {
-      console.log(res.statusText);
-    });
-  }
-
-  uploadScript() {
-
-    const data = new FormData();
-    for(var x = 0; x<this.evtScript.target.files.length; x++) {
-      data.append('file', this.evtScript.target.files[x]);
+    for(var x = 0; x<evt.target.files.length; x++) {
+      data.append('file', evt.target.files[x]);
+      console.log(evt.target.files[x]);
     }
     axios.post("http://localhost:8000/upload", data, {
     })
