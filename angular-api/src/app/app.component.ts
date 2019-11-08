@@ -33,14 +33,14 @@ export class AppComponent implements AfterViewInit{
     var evt;
     if (source == "data")
       evt = this.evtData;
-    else 
+    else
       evt = this.evtScript;
     const data = new FormData();
     for(var x = 0; x<evt.target.files.length; x++) {
       data.append('file', evt.target.files[x]);
       console.log(evt.target.files[x]);
     }
-    axios.post("http://localhost:8000/upload", data, {
+    axios.post("http://localhost:8080/api/files", data, {
     })
     .then(res => {
       console.log(res.statusText);

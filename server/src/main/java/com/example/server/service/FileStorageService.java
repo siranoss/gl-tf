@@ -12,7 +12,7 @@ import java.nio.file.StandardCopyOption;
 @Component
 public class FileStorageService {
 
-	private static final String FILE_DIRECTORY = "/var/files";
+	private static final String FILE_DIRECTORY = "./storage";
 
 	public void storeFile(MultipartFile file) throws IOException {
 		Path filePath = Paths.get(FILE_DIRECTORY + "/" + file.getOriginalFilename());
