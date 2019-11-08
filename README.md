@@ -1,4 +1,4 @@
-##Librairie et technologies nécessaires
+## Librairie et technologies nécessaires
 
 <br/>**Front-end:**
 <br/> Maven(facultatif) et spring-boot
@@ -6,7 +6,7 @@
 <br/>**Back-end:**
 <br/> Angular et npm
 
-##Commandes pour lancer le projet
+## Commandes pour lancer le projet
 
 <br/>**Front-end:**
 <br/> *ng serve --open* (ou alors *npm install* puis *npm start*)
