@@ -1,49 +1,30 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
-
-const axios = require('axios');
-
-interface HTMLInputEvent extends Event {
-    target: HTMLInputElement & EventTarget;
-}
-
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {  FileUploader,} from 'ng2-file-upload';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit{
-  title = 'angular-api';
-  evtData : HTMLInputEvent;
-  evtScript : HTMLInputEvent;
+export class AppComponent implements OnInit {
 
-  ngOnInit() {}
+  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
 
-  ngAfterViewInit() {}
+  uploader: FileUploader;
+  isDropOver: boolean;
 
-  onFileChangeData(event) {
-    this.evtData = event;
+  ngOnInit(): void {
+    const headers = [{name: 'Accept', value: 'application/json'}];
+    this.uploader = new FileUploader({url: 'api/files', autoUpload: false, headers: headers});
+    this.uploader.onCompleteAll = () => alert('File uploaded');
   }
 
-  onFileChangeScript(event) {
-    this.evtScript = event;
+
+  fileOverAnother(e: any): void {
+    this.isDropOver = e;
   }
 
-  upload(source) {
-    var evt;
-    if (source == "data")
-      evt = this.evtData;
-    else
-      evt = this.evtScript;
-    const data = new FormData();
-    for(var x = 0; x<evt.target.files.length; x++) {
-      data.append('file', evt.target.files[x]);
-      console.log(evt.target.files[x]);
-    }
-    axios.post("http://localhost:8080/api/files", data, {
-    })
-    .then(res => {
-      console.log(res.statusText);
-    });
+  fileClicked() {
+    this.fileInput.nativeElement.click();
   }
 }
