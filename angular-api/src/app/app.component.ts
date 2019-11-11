@@ -1,5 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {  FileUploader,} from 'ng2-file-upload';
+import {Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+//import { HttpClient } from '@angular/common/http';
+import {  FileUploader } from 'ng2-file-upload';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ export class AppComponent implements OnInit {
   scriptUploader: FileUploader;
   dataIsDropOver: boolean;
   scriptIsDropOver: boolean;
+
 
   ngOnInit(): void {
     const headers = [{name: 'Accept', value: 'application/json'}];
@@ -39,5 +41,13 @@ export class AppComponent implements OnInit {
 
   scriptClicked() {
     this.scriptInput.nativeElement.click();
+  }
+
+  runScript() {
+    if(!scriptIsDropOver) {
+      alert('No script posted');
+      return;
+    }
+
   }
 }

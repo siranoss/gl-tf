@@ -12,6 +12,7 @@ import java.io.IOException;
 public class FileController {
 
 	private final FileStorageService fileService;
+	private String scriptName;
 
 	@Autowired
 	public FileController(FileStorageService fileService) {
@@ -28,6 +29,19 @@ public class FileController {
 	@ResponseStatus(HttpStatus.OK)
 	public void handleScriptUpload(@RequestParam("file") MultipartFile file) throws IOException {
 		fileService.storeFile(file);
+		scriptName = file.getOriginalFilename;
 	}
 
+	@GetMapping(value = "/api/run")
+	@ResponseStatus(HttpStatus.OK)
+	public void handRun() throws InterruptedException {
+		try {
+			System.out.println("dÃ©but du programme");
+			String[] cmd = { "python", "./storage/" + scriptName};
+			Process p = Runtime.getRuntime().exec(cmd);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Fin du programme");
+	}
 }
