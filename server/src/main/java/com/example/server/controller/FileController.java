@@ -18,9 +18,15 @@ public class FileController {
 		this.fileService = fileService;
 	}
 
-	@PostMapping(value = "/api/files")
+	@PostMapping(value = "/api/data")
 	@ResponseStatus(HttpStatus.OK)
-	public void handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
+	public void handleDataUpload(@RequestParam("file") MultipartFile file) throws IOException {
+		fileService.storeFile(file);
+	}
+
+	@PostMapping(value = "/api/script")
+	@ResponseStatus(HttpStatus.OK)
+	public void handleScriptUpload(@RequestParam("file") MultipartFile file) throws IOException {
 		fileService.storeFile(file);
 	}
 

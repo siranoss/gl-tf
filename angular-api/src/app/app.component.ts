@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const headers = [{name: 'Accept', value: 'application/json'}];
-    this.dataUploader = new FileUploader({url: 'api/files', autoUpload: false, headers: headers});
+    this.dataUploader = new FileUploader({url: 'api/data', autoUpload: false, headers: headers});
     this.dataUploader.onCompleteAll = () => alert('File uploaded');
     this.scriptUploader = new FileUploader({url: 'api/script', autoUpload: false, headers: headers});
     this.scriptUploader.onCompleteAll = () => alert('File uploaded');
