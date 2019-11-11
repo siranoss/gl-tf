@@ -8,23 +8,36 @@ import {  FileUploader,} from 'ng2-file-upload';
 })
 export class AppComponent implements OnInit {
 
-  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
+  @ViewChild('dataInput', {static: false}) dataInput: ElementRef;
+  @ViewChild('scriptInput', {static: false}) scriptInput: ElementRef;
 
-  uploader: FileUploader;
-  isDropOver: boolean;
+  dataUploader: FileUploader;
+  scriptUploader: FileUploader;
+  dataIsDropOver: boolean;
+  scriptIsDropOver: boolean;
 
   ngOnInit(): void {
     const headers = [{name: 'Accept', value: 'application/json'}];
-    this.uploader = new FileUploader({url: 'api/files', autoUpload: false, headers: headers});
-    this.uploader.onCompleteAll = () => alert('File uploaded');
+    this.dataUploader = new FileUploader({url: 'api/files', autoUpload: false, headers: headers});
+    this.dataUploader.onCompleteAll = () => alert('File uploaded');
+    this.scriptUploader = new FileUploader({url: 'api/script', autoUpload: false, headers: headers});
+    this.scriptUploader.onCompleteAll = () => alert('File uploaded');
   }
 
 
-  fileOverAnother(e: any): void {
-    this.isDropOver = e;
+  dataOverAnother(e: any): void {
+    this.dataIsDropOver = e;
   }
 
-  fileClicked() {
-    this.fileInput.nativeElement.click();
+  dataClicked() {
+    this.dataInput.nativeElement.click();
+  }
+
+  scriptOverAnother(e: any): void {
+    this.scriptIsDropOver = e;
+  }
+
+  scriptClicked() {
+    this.scriptInput.nativeElement.click();
   }
 }
