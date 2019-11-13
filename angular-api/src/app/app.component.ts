@@ -1,11 +1,14 @@
-import {Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-//import { HttpClient } from '@angular/common/http';
-import {  FileUploader } from 'ng2-file-upload';
+import { NgModule, Component, ElementRef, OnInit, ViewChild, Injectable } from '@angular/core';
+import { FileUploader } from 'ng2-file-upload';
+import { HttpClient } from '@angular/common/http'
+import 'rxjs/add/operator/map';
+
+const axios = require('axios');
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
 
@@ -16,7 +19,9 @@ export class AppComponent implements OnInit {
   scriptUploader: FileUploader;
   dataIsDropOver: boolean;
   scriptIsDropOver: boolean;
+  products = [];
 
+  constructor(private runScriptGetRequest: HttpClient) { }
 
   ngOnInit(): void {
     const headers = [{name: 'Accept', value: 'application/json'}];
@@ -25,7 +30,6 @@ export class AppComponent implements OnInit {
     this.scriptUploader = new FileUploader({url: 'api/script', autoUpload: false, headers: headers});
     this.scriptUploader.onCompleteAll = () => alert('File uploaded');
   }
-
 
   dataOverAnother(e: any): void {
     this.dataIsDropOver = e;
@@ -44,10 +48,8 @@ export class AppComponent implements OnInit {
   }
 
   runScript() {
-    if(!scriptIsDropOver) {
-      alert('No script posted');
-      return;
-    }
-
+    return this.runScriptGetRequest.get('http://localhost:8080/api/run').map((response: any) => {
+      return response;
+    });
   }
 }
