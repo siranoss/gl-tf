@@ -1,0 +1,57 @@
+Besoins
+
+-> pouvoir exe python pr transformer fichier (txt, image...)
+
+-> possibilité coder python ds le portail et envoie direct sur le serv
+
+-> avoir retour console (savoir si ça s'est bien passé....)
+
+-> pouvoir débugger dans portail
+
+-> librairie à importer pour gestion des chemins (pr accéder aux fichiers)
+(pas au client de coder comment recup le fichier) et controller droit d'accés aux fichiers
+on ne veut pas que les clients sachent où sont les fichiers
+-> pas de perte de performances
+
+-> script -> choisir sur quel fichier on l'exe
+
+
+User stories
+
+0 + 1 + 2
+
+0 : Mise en place project front (Angular 8) et back (ASP net core, jee, spring boot, python)
+Point : 5
+
+1 : En tant qu'utilisateur, je peux choisir un script à uploader.
+Description : possibilité de saisir un script python qui va être envoyé sur le serveur
+How to demo : pouvoir selectionner un script python
+              pouvoir verifier que le fichier script a bien été envoyé sur le serveur
+              pouvoir verifier que le fichier est bien présent sur le disque serveur
+Point : 5
+
+
+2 : En tant qu'utilisateur, je peux choisir un fichier data à uploader
+Description : possibilité de saisir un ou plusieurs fichiers qui va être envoyé sur le serveur
+How to demo : pouvoir selectionner un ou plusieurs fichiers
+              pouvoir verifier que les fichiers ont  bien été envoyé sur le serveur
+              pouvoir verifier que les fichiers sont bien présents sur le disque serveur
+Point : 5
+
+
+3 : En tant qu'utilisateur, que je peux executer le script sur le fichier data
+Description : selectionner un script (qui fait quelque chose) déjà uploadé ainsi qu'un ou plusieurs fichiers, puis lancer
+              l'execution du script
+How to demo : On clique sur le bouton run
+              On constate sur le serveur que le fichier a été modifié
+Point : 8
+
+
+
+4 : En tant qu'utilisateur, je peux controler que le script s'est bien executé
+Description : avoir un champ OK/KO
+how to demo : Une fois le script executé, s'il s'est bien executé on affiche OK, KO inversement
+              de manière automatique
+Point : 5
+
+5 : En tant qu'utilisateur, je peux executer un script dépendant d'une librairie tierce
