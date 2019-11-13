@@ -1,15 +1,15 @@
 ## Librairie et technologies nécessaires
 
 <br/>**Front-end:**
-<br/> Maven(facultatif) et spring-boot
+<br/> Angular et npm
 
 <br/>**Back-end:**
-<br/> Angular et npm
+<br/> Maven(facultatif) et spring-boot
 
 ## Commandes pour lancer le projet
 
 <br/>**Front-end:**
-<br/> *ng serve --open* (ou alors *npm install* puis *npm start*)
+<br/> *npm install* puis *npm start*)
 <br/> Se connecter à *localhost:4200*
 
 <br/>**Back-end:**
