@@ -25,9 +25,9 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const headers = [{name: 'Accept', value: 'application/json'}];
-    this.dataUploader = new FileUploader({url: 'api/data', autoUpload: false, headers: headers});
+      this.dataUploader = new FileUploader({url: 'api/data', autoUpload: false, headers: headers });
     this.dataUploader.onCompleteAll = () => alert('File uploaded');
-    this.scriptUploader = new FileUploader({url: 'api/script', autoUpload: false, headers: headers});
+      this.scriptUploader = new FileUploader({url: 'api/script', autoUpload: false, headers: headers });
     this.scriptUploader.onCompleteAll = () => alert('File uploaded');
   }
 
@@ -49,6 +49,24 @@ export class AppComponent implements OnInit {
 
   runScript() {
     return this.runScriptGetRequest.get('http://localhost:8080/api/run').map((response: any) => {
+      return response;
+    });
+  }
+
+    runScript2() {
+        var script = this.scriptUploader.queue[0];
+        var data = this.scriptUploader.queue;
+        var listDataFiles = []
+        for (let dataFile of data) {
+            listDataFiles.push(dataFile.file.name);
+        }
+        var jsonToPost = {
+            scriptName: script.file.name,
+            dataList: [
+                listDataFiles
+            ]
+        }
+    return this.runScriptGetRequest.post('http://localhost:8080/api/run', jsonToPost).map((response: any) => {
       return response;
     });
   }
