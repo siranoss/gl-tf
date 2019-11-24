@@ -35,10 +35,12 @@ public class FileController {
 		scriptName = file.getOriginalFilename();
 	}
 
-	@GetMapping(value = "/api/run")
+	@PostMapping(value = "/api/run")
 	//@CrossOrigin(origins = "http://localhost:4200")
+	@CrossOrigin(origins = "*")
 	@ResponseStatus(HttpStatus.OK)
-	public String handleRun() throws InterruptedException {
+	public String handleRun(@RequestBody MultipartFile file) throws InterruptedException, IOException {
+		fileService.storeFile(file);
 		String s = "";
 		String tmp;
 
