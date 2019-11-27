@@ -11,6 +11,7 @@
 <br/>**Front-end:**
 <br/> *npm install* puis *npm start*)
 <br/> Se connecter à *localhost:4200*
+<br/> ATTENTION : Importer les fichiers, PUIS les sélectionner avec les checkboxes
 
 <br/>**Back-end:**
 <br/> *mvn -e spring-boot:run* (ou *./mvnw -e spring-boot:run* si Maven n'est pas installé)
