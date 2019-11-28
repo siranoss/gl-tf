@@ -39,7 +39,8 @@ export class AppComponent implements OnInit {
   }
 
   displayer() {
-    console.log("Do nothin!");
+    this.resultDisplayer.hidden = false;
+    this.errorDisplayer.hidden = false;
   }
 
   dataOverAnother(e: any): void {
@@ -75,12 +76,6 @@ export class AppComponent implements OnInit {
   }
 
   runScript() {
-    return this.runScriptGetRequest.get('http://localhost:8080/api/run').subscribe((response: any) => {
-      return response;
-    });
-  }
-
-  runScript2() {
     var script = this.scriptUploader.queue[0];
     var jsonToPost = {
       scriptName: script.file.name,
@@ -88,18 +83,16 @@ export class AppComponent implements OnInit {
         this.filesToSend
       ]
     }
+
     console.log(jsonToPost.dataList[0]);
-    return this.runScriptGetRequest.post('http://localhost:8080/api/run', jsonToPost).subscribe((response: any) => {
+    this.runScriptGetRequest.post('http://localhost:8080/api/run', jsonToPost).subscribe((response) => {
       console.log(response);
 
       var responseScriptResult = response[0].stdIn;
       var responseScriptError = response[0].stdEr;
 
-
       resultDisplayer.innerHTML = responseScriptResult;
       errorDisplayer.innerHTML = responseScriptError;
-
-      return response;
     });
   }
 }

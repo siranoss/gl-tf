@@ -91,7 +91,7 @@
 
   <div>
     <button type="button" class="btn btn-success btn-s"
-            (click)="runScript2()">
+            (click)="runScript()">
       Run posted script
     </button>
     <div>
@@ -113,9 +113,9 @@
     <button type="button" class="btn btn-success btn-s" (click)="displayer()">
       Afficher résultat
     </button>
-    <div id="resultDisplayer">
+    <div id="resultDisplayer" hidden>
     </div>
-    <div id="errorDisplayer" class="redtext">
+    <div id="errorDisplayer" class="redtext" hidden>
     </div>
   </div>
 

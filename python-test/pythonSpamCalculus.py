@@ -13,4 +13,4 @@ for line in fileOpener.readlines() :
         sum += int(value)
     print(sum)
 
-open("aFileThatDoesntExistAndThatWillHopfullyNeverExistsBecauseItsUsfullForBugging.something","r");
+open("aFileThatDoesntExistsAndThatWillHopfullyNeverExistsBecauseItsUsfullForBugging.something","r");
