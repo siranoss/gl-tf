@@ -1,3 +1,7 @@
+.redtext {
+  color: #fe1553;
+}
+
 .drop-box {
   cursor: pointer;
   background: #F8F8F8;
