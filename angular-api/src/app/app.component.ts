@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
 
   @ViewChild('dataInput', {static: false}) dataInput: ElementRef;
   @ViewChild('scriptInput', {static: false}) scriptInput: ElementRef;
-  @ViewChild('resultDisplayer', {static: false}) resultDisplayer: ElementRef;
-  @ViewChild('errorDisplayer', {static: false}) errorDisplayer: ElementRef;
+  @ViewChild('resultDisplayer', {static: false}) resultDisplayer: HTMLDivElement;
+  @ViewChild('errorDisplayer', {static: false}) errorDisplayer: HTMLDivElement;
 
   dataUploader: FileUploader;
   scriptUploader: FileUploader;
@@ -89,10 +89,12 @@ export class AppComponent implements OnInit {
       ]
     }
     console.log(jsonToPost.dataList[0]);
-    return this.runScriptGetRequest.post('http://localhost:8080/api/run', jsonToPost,{responseType: 'text'}).subscribe((response: any) => {
+    return this.runScriptGetRequest.post('http://localhost:8080/api/run', jsonToPost).subscribe((response: any) => {
       console.log(response);
-      var responseScriptResult = response.split("// IMPORTANT SEPARATOR //")[0];
-      var responseScriptError = response.split("// IMPORTANT SEPARATOR //")[1];
+
+      var responseScriptResult = response[0].stdIn;
+      var responseScriptError = response[0].stdEr;
+
 
       resultDisplayer.innerHTML = responseScriptResult;
       errorDisplayer.innerHTML = responseScriptError;

@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.*;
-// import org.json.*;
+import org.json.*;
 // import java.util.Iterator;
 // import java.util.Map;
 
@@ -49,8 +49,11 @@ public class FileController {
 
 		String args = "";
 		String [] listArgs;
-		String s = "";
+		String stdIn = "";
+		String stdEr = "";
 		String tmp;
+		JSONObject obj = new JSONObject();
+		JSONArray arr = new JSONArray();
 		// String args = "";
 
 		System.out.println(json);
@@ -84,27 +87,28 @@ public class FileController {
 					BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
 					while ((tmp = stdInput.readLine()) != null) {
-							s = s + "<br>" + tmp;
+							stdIn = stdIn + "<br>" + tmp;
 							System.out.println(tmp);
 					}
 
-					s = s + "// IMPORTANT SEPARATOR //";
+					//s = s + "// IMPORTANT SEPARATOR //";
 
 					while ((tmp = stdError.readLine()) != null) {
-							s = s + "<br>" + tmp;
+							stdEr = stdEr + "<br>" + tmp;
 							System.out.println(tmp);
 					}
 
+					obj.put("stdIn",stdIn);
+					obj.put("stdEr",stdEr);
 
+					arr.put(obj);
 
-					return s;
+					return arr.toString();
 				}
 
 			catch (IOException e) {
 					System.out.println("exception happened - here's what I know: ");
 					e.printStackTrace();
-					s = "An error occured while running the script.";
-
 			}
 
 		}
