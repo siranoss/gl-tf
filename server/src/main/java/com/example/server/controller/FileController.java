@@ -66,8 +66,9 @@ public class FileController {
 		listArgs = args.split(",");
 		args = "";
 		for (String value: listArgs){
-			args = args + value;
+			args = args + "./storage/" + value + " ";
 		}
+		args = args + "BLOCKINGPOINT";
 		//System.out.println(listArgs);
 		tmp = tmp.split(":")[1];
 		scriptName = tmp.substring(1, tmp.length()-1);
@@ -76,7 +77,7 @@ public class FileController {
 		//System.out.println("ScriptName:"+scriptName);
 		if (scriptName != null) {
 			try {
-					String[] cmd = { "python", "./storage/" + scriptName, "./storage/" + args };
+					String cmd = "python" + " ./storage/" + scriptName + " " + args ;
 
 					Process p = Runtime.getRuntime().exec(cmd);
 					BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -111,46 +112,3 @@ public class FileController {
 		return "An error occured, no script provided.";
 	}
 }
-
-/*
-@PostMapping(value = "/api/run")
-//@CrossOrigin(origins = "http://localhost:4200")
-@CrossOrigin(origins = "*")
-@ResponseStatus(HttpStatus.OK)
-public String handleRun(@RequestBody MultipartFile file) throws InterruptedException, IOException {
-	fileService.storeFile(file);
-	String s = "";
-	String tmp;
-
-	if (scriptName != null) {
-		try {
-				String[] cmd = { "python", "./storage/"+scriptName };
-				Process p = Runtime.getRuntime().exec(cmd);
-				BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
-				BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-
-				while ((tmp = stdInput.readLine()) != null) {
-						s = s + "\n" + tmp;
-						System.out.println(tmp);
-				}
-
-				while ((tmp = stdError.readLine()) != null) {
-						s = s + "\n" + tmp;
-						System.out.println(tmp);
-				}
-		}
-		catch (IOException e) {
-				System.out.println("exception happened - here's what I know: ");
-				e.printStackTrace();
-				s = "An error occured while running the script.";
-		}
-		finally {
-			return s;
-		}
-	}
-	else {
-		return "Error, no script provided.";
-	}
-
-}
-*/
