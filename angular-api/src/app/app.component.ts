@@ -10,14 +10,20 @@ const axios = require('axios');
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+    // resultTemplate: `<div [innerHTML]="resultValue"></div>`,
+    // errorTemplate: `<div [innerHTML]="errorValue"></div>`,
 })
 export class AppComponent implements OnInit {
 
     @ViewChild('dataInput', { static: false }) dataInput: ElementRef;
     @ViewChild('scriptInput', { static: false }) scriptInput: ElementRef;
-    @ViewChild('resultDisplayer', { static: false }) resultDisplayer: HTMLDivElement;
-    @ViewChild('errorDisplayer', { static: false }) errorDisplayer: HTMLDivElement;
+    // @ViewChild('resultDisplayer', { static: false }) resultDisplayer: HTMLDivElement;
+    // @ViewChild('errorDisplayer', { static: false }) errorDisplayer: HTMLDivElement;
 
+    resultValue: String;
+    resultHidder: boolean;
+    errorValue: String;
+    errorHidder: boolean;
     dataUploader: FileUploader;
     scriptUploader: FileUploader;
     dataIsDropOver: boolean;
@@ -31,6 +37,8 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.resultHidder = true;
+        this.errorHidder = true;
         const headers = [{ name: 'Accept', value: 'application/json' }];
         this.dataUploader = new FileUploader({ url: 'api/data', autoUpload: false, headers: headers });
         this.dataUploader.onCompleteAll = () => alert('File uploaded');
@@ -39,8 +47,8 @@ export class AppComponent implements OnInit {
     }
 
     displayer() {
-        resultDisplayer.hidden = false;
-        errorDisplayer.hidden = false;
+        this.resultHidder = false;
+        this.errorHidder = false;
     }
 
     dataOverAnother(e: any): void {
@@ -91,8 +99,8 @@ export class AppComponent implements OnInit {
             var responseScriptResult = response[0].stdIn;
             var responseScriptError = response[0].stdEr;
 
-            resultDisplayer = responseScriptResult;
-            errorDisplayer.innerHTML = responseScriptError;
+            this.resultValue = responseScriptResult;
+            this.errorValue = responseScriptError;
         });
     }
 }

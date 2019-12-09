@@ -24,14 +24,12 @@ public class FileController {
     }
 
     @PostMapping(value = "/api/data")
-    // @CrossOrigin(origins = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
     public void handleDataUpload(@RequestParam("file") MultipartFile file) throws IOException {
         fileService.storeFile(file);
     }
 
     @PostMapping(value = "/api/script")
-    // @CrossOrigin(origins = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
     public void handleScriptUpload(@RequestParam("file") MultipartFile file) throws IOException {
         fileService.storeFile(file);
@@ -39,10 +37,9 @@ public class FileController {
     }
 
     @PostMapping(value = "/api/run")
-    // @CrossOrigin(origins = "http://localhost:4200")
     @CrossOrigin(origins = "*")
     @ResponseStatus(HttpStatus.OK)
-    public String handleRun(@RequestBody ExecScriptRequest json) throws InterruptedException, IOException {
+    public String handleRun(@RequestBody String json) throws InterruptedException, IOException {
         // fileService.storeFile(file);
 
         // JSONObject jsonTree = new JSONObject(json);
@@ -58,12 +55,10 @@ public class FileController {
 
         System.out.println(json);
 
-        // System.out.println(json);
         tmp = json.split(",")[0];
         args = json.split(",", 2)[1];
         args = args.replace("[[", "").replace("]]}", "");
         args = args.replace("\"", "");
-        // System.out.println("Args.split(':')"+args);
         args = args.replace("\"\"", "");
         args = args.split(":")[1];
         listArgs = args.split(",");

@@ -99,7 +99,10 @@
             <table>
                 <tbody>
                     <tr *ngFor="let item of dataUploader.queue; let i = index">
-                        <td>i {{ item?.file?.name }}<input type="checkbox" value="i" (click)="submitFiles(i)"></td>
+                        <td>
+                          i {{ item?.file?.name }}
+                          <input type="checkbox" value="i" (click)="submitFiles(i)">
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -110,10 +113,9 @@
         <button type="button" class="btn btn-success btn-s" (click)="displayer()">
             Afficher résultat
         </button>
-        <div id="resultDisplayer">
-            {{resultDisplayer}}
+        <div id="resultDisplayer" [innerHTML]="resultValue" [hidden]="resultHidder">
         </div>
-        <div id="errorDisplayer" class="redtext" hidden>
+        <div id="errorDisplayer" [innerHTML]="errorValue" [hidden]="errorHidder" class="redtext">
         </div>
     </div>
 
