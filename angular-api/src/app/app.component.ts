@@ -17,8 +17,9 @@ export class AppComponent implements OnInit {
 
     @ViewChild('dataInput', { static: false }) dataInput: ElementRef;
     @ViewChild('scriptInput', { static: false }) scriptInput: ElementRef;
-    // @ViewChild('resultDisplayer', { static: false }) resultDisplayer: HTMLDivElement;
-    // @ViewChild('errorDisplayer', { static: false }) errorDisplayer: HTMLDivElement;
+
+    editorOptions = { theme: 'vs-dark', language: 'python' };
+    code: string = 'function x() {\nconsole.log("Hello world!");\n}';
 
     resultValue: String;
     resultHidder: boolean;
