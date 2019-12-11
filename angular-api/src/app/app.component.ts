@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
     // @ViewChild('resultDisplayer', { static: false }) resultDisplayer: HTMLDivElement;
     // @ViewChild('errorDisplayer', { static: false }) errorDisplayer: HTMLDivElement;
 
+    runIndication: String;
     resultValue: String;
     resultHidder: boolean;
     errorValue: String;
@@ -37,6 +38,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.runIndication = "Waiting for a script to run";
         this.resultHidder = true;
         this.errorHidder = true;
         const headers = [{ name: 'Accept', value: 'application/json' }];

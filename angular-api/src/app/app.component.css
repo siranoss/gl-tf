@@ -28,12 +28,38 @@
 
 .right {
   float: right;
-  width: 50%;
 }
 
 .left {
   float: left;
+}
+
+.flush-left {
+  left: 10px;
+}
+
+.middle-width {
   width: 50%;
+}
+
+.upload-section {
+  width: 500px;
+  margin: 10px 30px 30px auto;
+}
+
+.run-indicator {
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 2px 6px 1px 1px;
+  padding-top: 16px;
+  padding-left: 16px;
+  padding-bottom: 8px;
+  padding-right: 100%;
+  background-color: #DCDCDC;
+  font-size: medium;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  flex-shrink: 0;
 }
 
 input[type='file'] {
