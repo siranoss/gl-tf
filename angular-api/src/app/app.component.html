@@ -130,6 +130,13 @@
           <div id="errorDisplayer" [innerHTML]="errorValue" [hidden]="errorHidder" class="redtext">
           </div>
 
+          <div style="height: 500px">
+            <ngx-monaco-editor style="height: 100% width: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+
+            <button type="button" (click)="uploadWrittenScript()">
+              Upload
+            </button>
+          </div>
 
       </div>
 
