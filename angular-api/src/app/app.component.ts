@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
     @ViewChild('scriptInput', { static: false }) scriptInput: ElementRef;
 
     editorOptions = { theme: 'vs-dark', language: 'python' };
-    code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+    code: string = 'def max(a, b):\n\tif (a > b):\n\t\treturn a\n\telse:\n\t\treturn b\n\nprint(max(1, 3))\n';
 
     resultValue: String;
     resultHidder: boolean;
@@ -41,9 +41,9 @@ export class AppComponent implements OnInit {
         this.resultHidder = true;
         this.errorHidder = true;
         const headers = [{ name: 'Accept', value: 'application/json' }];
-        this.dataUploader = new FileUploader({ url: 'api/data', autoUpload: false, headers: headers });
+        this.dataUploader = new FileUploader({ url: 'api/data', autoUpload: true, headers: headers });
         this.dataUploader.onCompleteAll = () => alert('File uploaded');
-        this.scriptUploader = new FileUploader({ url: 'api/script', autoUpload: false, headers: headers });
+        this.scriptUploader = new FileUploader({ url: 'api/script', autoUpload: true, headers: headers });
         this.scriptUploader.onCompleteAll = () => alert('File uploaded');
     }
 
@@ -101,5 +101,11 @@ export class AppComponent implements OnInit {
             this.resultValue = responseScriptResult;
             this.errorValue = responseScriptError;
         });
+    }
+
+    uploadWrittenScript() {
+        let file = new File(this.code.split(""), "_pythonScript.py", { type: "text/plain" });
+        let files = [file];
+        this.scriptUploader.addToQueue(files);
     }
 }
