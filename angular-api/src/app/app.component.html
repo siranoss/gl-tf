@@ -111,7 +111,7 @@
 
       </div>
 
-      <div class="right">
+      <div class="right" style="width: 50%">
 
         <div class="run-indicator" [innerHTML]="runIndication">
         </div>
@@ -130,7 +130,7 @@
           <div id="errorDisplayer" [innerHTML]="errorValue" [hidden]="errorHidder" class="redtext">
           </div>
 
-          <div style="height: 500px">
+          <div class="editor-section">
             <ngx-monaco-editor style="height: 100% width: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
 
             <button type="button" (click)="uploadWrittenScript()">
