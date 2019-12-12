@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 
 import com.example.server.service.FileStorageService;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import java.util.regex.*;
+import org.json.*;
 
 @RestController
 public class FileController {
@@ -53,9 +54,19 @@ public class FileController {
 		String [] listArgs;
 		String s = "";
 		String tmp;
+		System.out.println(json);
+
+		JSONObject jsonReceived = new JSONObject(json);
+		scriptName = jsonReceived.getString("scriptName");
+		JSONArray arr = jsonReceived.getJSONArray("dataList");
+		for (int i = 0; i < arr.length(); i++) {
+            args +=  arr.getJSONObject(i);
+            System.out.println(args);
+        }
+	//	s = jsonReceived.getJSONObject("script");
 
 		//System.out.println(json);
-		tmp = json.split(",")[0];
+		/*tmp = json.split(",")[0];
 		args = json.split(",",2)[1];
 		args = args.replace("[[", "").replace("]]}", "");
 		args = args.replace("\"", "");
@@ -70,8 +81,8 @@ public class FileController {
 		}
 		//System.out.println(listArgs);
 		tmp = tmp.split(":")[1];
-		scriptName = tmp.substring(1, tmp.length()-1);
-		//System.out.println("ScriptName:"+scriptName);
+		//scriptName = tmp.substring(1, tmp.length()-1);
+		//System.out.println("ScriptName:"+scriptName);*/
 		if (scriptName != null) {
 			try {
 					String[] cmd = { "python", "./storage/"+scriptName, args };
