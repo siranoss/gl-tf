@@ -100,6 +100,13 @@ export class AppComponent implements OnInit {
             var responseScriptResult = response[0].stdIn;
             var responseScriptError = response[0].stdEr;
 
+            if(response[0].retType == 1){
+              this.runIndication = "An error occured!"
+            }
+            else if(response[0].retType == 0){
+              this.runIndication = "Execution succeed";
+            }
+
             this.resultValue = responseScriptResult;
             this.errorValue = responseScriptError;
         });

@@ -55,6 +55,14 @@
 
         </div>
 
+        <div class="editor-section">
+          <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+
+          <button type="button" (click)="uploadWrittenScript()">
+            Upload
+          </button>
+        </div>
+
         <div>
 
           <div class="left middle-width">
@@ -128,14 +136,6 @@
           <div id="resultDisplayer" [innerHTML]="resultValue" [hidden]="resultHidder">
           </div>
           <div id="errorDisplayer" [innerHTML]="errorValue" [hidden]="errorHidder" class="redtext">
-          </div>
-
-          <div class="editor-section">
-            <ngx-monaco-editor style="height: 100% width: 100%" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
-
-            <button type="button" (click)="uploadWrittenScript()">
-              Upload
-            </button>
           </div>
 
       </div>

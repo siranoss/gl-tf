@@ -48,18 +48,17 @@
 }
 
 .editor-section {
-  width: 500px;
-  height: 500px;
+  width: 400px;
 }
 
 .run-indicator {
-  width: 50%;
+  width: 100%;
   border: 1px solid black;
   border-radius: 2px 6px 1px 1px;
   padding-top: 16px;
   padding-left: 16px;
   padding-bottom: 8px;
-  padding-right: 50%;
+  padding-right: 16px;
   background-color: #DCDCDC;
   font-size: medium;
   margin-bottom: 30px;

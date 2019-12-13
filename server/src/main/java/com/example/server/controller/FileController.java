@@ -3,6 +3,7 @@ package com.example.server.controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.FileReader;
 
 import com.example.server.service.FileStorageService;
 
@@ -23,6 +24,26 @@ public class FileController {
 
 	private final FileStorageService fileService;
 	private String scriptName = null;
+
+	public void CheckForImport(String fileName) throws IOException {
+
+		BufferedReader br = new BufferedReader(new FileReader("./storage/"+fileName));
+		String st;
+		Process p;
+		String []libs;
+		String []cmd = { "pip", "instal", "" };
+
+		System.out.println("Checking for imports");
+			while ((st = br.readLine())!= null){
+			if ( st.contains("import") ) {
+				libs = st.split(" ");
+				System.out.println("installing the lib:" + libs[1]);
+				cmd[2] = libs[1];
+				p = Runtime.getRuntime().exec(cmd );
+		}
+			}
+			 br.close();
+			}
 
 	@Autowired
 	public FileController(FileStorageService fileService) {
@@ -52,21 +73,23 @@ public class FileController {
 		//fileService.storeFile(file);
 		String args = "";
 		String [] listArgs;
-		String s = "";
+		String stdIn = "";
+		String stdEr = "";
 		String tmp;
 		System.out.println(json);
 
-		JSONObject jsonReceived = new JSONObject(json);
-		scriptName = jsonReceived.getString("scriptName");
-		JSONArray arr = jsonReceived.getJSONArray("dataList");
-		for (int i = 0; i < arr.length(); i++) {
-            args +=  arr.getJSONObject(i);
-            System.out.println(args);
-        }
-	//	s = jsonReceived.getJSONObject("script");
+		// JSONObject jsonReceived = new JSONObject(json);
+		// scriptName = jsonReceived.getString("scriptName");
+		// JSONArray arr = jsonReceived.getJSONArray("dataList");
+		// for (int i = 0; i < arr.length(); i++) {
+    //         args +=  arr.getJSONObject(i);
+    //         System.out.println(args);
+    //     }
+
+		//s = jsonReceived.getJSONObject("script");
 
 		//System.out.println(json);
-		/*tmp = json.split(",")[0];
+		tmp = json.split(",")[0];
 		args = json.split(",",2)[1];
 		args = args.replace("[[", "").replace("]]}", "");
 		args = args.replace("\"", "");
@@ -81,10 +104,14 @@ public class FileController {
 		}
 		//System.out.println(listArgs);
 		tmp = tmp.split(":")[1];
-		//scriptName = tmp.substring(1, tmp.length()-1);
-		//System.out.println("ScriptName:"+scriptName);*/
-		if (scriptName != null) {
+		scriptName = tmp.substring(1, tmp.length()-1);
+		CheckForImport(scriptName);
+
+		JSONObject obj = new JSONObject();
+		JSONArray ret = new JSONArray();
+
 			try {
+					int retType = 0;
 					String[] cmd = { "python", "./storage/"+scriptName, args };
 
 					Process p = Runtime.getRuntime().exec(cmd);
@@ -92,30 +119,32 @@ public class FileController {
 					BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
 					while ((tmp = stdInput.readLine()) != null) {
-							s = s + "\n" + tmp;
+							stdIn = stdIn + "<br>" + tmp;
 							System.out.println(tmp);
 					}
 
 					while ((tmp = stdError.readLine()) != null) {
-							s = s + "\n" + tmp;
+							retType = 1;
+							stdEr = stdEr + "<br>" + tmp;
 							System.out.println(tmp);
 					}
-					return json;
+
+					obj.put("stdIn",stdIn);
+					obj.put("stdEr",stdEr);
+					obj.put("retType",retType);
+
+					ret.put(obj);
+
+					return ret.toString();
 				}
 
 			catch (IOException e) {
 					System.out.println("exception happened - here's what I know: ");
 					e.printStackTrace();
-					s = "An error occured while running the script.";
 
 			}
 
-		}
-		else {
-		//	return "Error, no script provided.";
-		return json;
-		}
-		return json;
+			return "An error occured, no script provided.";
 
 	}
 }
