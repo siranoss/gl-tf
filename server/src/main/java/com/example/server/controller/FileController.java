@@ -91,7 +91,7 @@ public class FileController {
 		//System.out.println(json);
 		tmp = json.split(",")[0];
 		args = json.split(",",2)[1];
-		args = args.replace("[[", "").replace("]]}", "");
+		args = args.replace("[", "").replace("]}", "");
 		args = args.replace("\"", "");
 		//System.out.println("Args.split(':')"+args);
 		args = args.replace("\"\"", "");
@@ -102,7 +102,7 @@ public class FileController {
 			args = args + value + " ";
 
 		}
-		//System.out.println(listArgs);
+
 		tmp = tmp.split(":")[1];
 		scriptName = tmp.substring(1, tmp.length()-1);
 		CheckForImport(scriptName);
@@ -113,6 +113,7 @@ public class FileController {
 			try {
 					int retType = 0;
 					String[] cmd = { "python", "./storage/"+scriptName, args };
+					System.out.println("python ./storage/"+scriptName + " " + args);
 
 					Process p = Runtime.getRuntime().exec(cmd);
 					BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
