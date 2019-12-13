@@ -42,10 +42,19 @@
   width: 50%;
 }
 
-.upload-section {
+#left {
+  float: left;
+  width:400px;
+}
+
+#right {
+  margin-left: 400px;
+}
+
+/* .upload-section {
   width: 400px;
   margin: 10px 30px 30px auto;
-}
+} */
 
 .editor-section {
   width: 400px;
