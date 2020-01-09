@@ -70,6 +70,18 @@ public class FileController {
 		return script;
     }
 
+	@PostMapping(value = "/api/import")
+    // @CrossOrigin(origins = "http://localhost:4200")
+    @ResponseStatus(HttpStatus.OK)
+	//@CrossOrigin(origins = "*")
+    public String handleImportUpload(@RequestParam("file") MultipartFile file) throws IOException {
+
+		/*TODO : storage*/
+
+		String imp = new String(file.getBytes());
+		return imp;
+    }
+
     @PostMapping(value = "/api/run")
     // @CrossOrigin(origins = "http://localhost:4200")
     @CrossOrigin(origins = "*")
