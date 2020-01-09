@@ -98,7 +98,7 @@ public class FileController {
         listArgs = json.dataList;
         args = "";
         for (String value : listArgs) {
-            args = args + value + " ";
+            args = args + "./storage/" + value + " ";
 
         }
         JSONObject obj = new JSONObject();
@@ -109,7 +109,8 @@ public class FileController {
 
         try {
             int retType = 0;
-            String[] cmd = { "python", "./storage/" + scriptName, args };
+            //String[] cmd = { "python", "./storage/" + scriptName, args };
+            String cmd = "python" + " ./storage/" + scriptName + " " + args;
             System.out.println("python ./storage/" + scriptName + " " + args);
 
             Process p = Runtime.getRuntime().exec(cmd);
