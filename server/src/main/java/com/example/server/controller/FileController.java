@@ -61,9 +61,13 @@ public class FileController {
     @PostMapping(value = "/api/script")
     // @CrossOrigin(origins = "http://localhost:4200")
     @ResponseStatus(HttpStatus.OK)
-    public void handleScriptUpload(@RequestParam("file") MultipartFile file) throws IOException {
+	//@CrossOrigin(origins = "*")
+    public String handleScriptUpload(@RequestParam("file") MultipartFile file) throws IOException {
         fileService.storeFile(file);
         scriptName = file.getOriginalFilename();
+		
+		String script = new String(file.getBytes());
+		return script;
     }
 
     @PostMapping(value = "/api/run")

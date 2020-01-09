@@ -46,7 +46,10 @@ export class AppComponent implements OnInit {
         this.dataUploader = new FileUploader({ url: 'api/data', autoUpload: true, headers: headers });
         this.dataUploader.onCompleteAll = () => alert('File uploaded');
         this.scriptUploader = new FileUploader({ url: 'api/script', autoUpload: true, headers: headers });
-        this.scriptUploader.onCompleteAll = () => alert('File uploaded');
+       /* this.scriptUploader.onCompleteAll = () => {
+            alert('File uploaded');
+        }*/
+        this.scriptUploader.response.subscribe(res => this.code = res);
     }
 
     displayer() {
