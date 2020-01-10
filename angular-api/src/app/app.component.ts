@@ -17,9 +17,12 @@ export class AppComponent implements OnInit {
 
     @ViewChild('dataInput', { static: false }) dataInput: ElementRef;
     @ViewChild('scriptInput', { static: false }) scriptInput: ElementRef;
+    @ViewChild('importInput', { static: false }) importInput: ElementRef;
 
-    editorOptions = { theme: 'vs-dark', language: 'python' };
+    editorOptionsCode = { theme: 'vs-dark', language: 'python' };
+    editorOptionsImport = { theme: 'vs-dark', language: 'python' };
     code: string = 'def max(a, b):\n\tif (a > b):\n\t\treturn a\n\telse:\n\t\treturn b\n\nprint(max(1, 3))\n';
+    import: string = '';
 
     runIndication: String;
     resultValue: String;
@@ -28,6 +31,7 @@ export class AppComponent implements OnInit {
     errorHidder: boolean;
     dataUploader: FileUploader;
     scriptUploader: FileUploader;
+    importUploader: FileUploader;
     dataIsDropOver: boolean;
     scriptIsDropOver: boolean;
     products = [];
@@ -44,7 +48,18 @@ export class AppComponent implements OnInit {
         this.errorHidder = true;
         const headers = [{ name: 'Accept', value: 'application/json' }];
         this.dataUploader = new FileUploader({ url: 'api/data', autoUpload: true, headers: headers });
+<<<<<<< HEAD
         this.scriptUploader = new FileUploader({ url: 'api/script', autoUpload: true, headers: headers });
+=======
+        /*this.dataUploader.onCompleteAll = () => alert('File uploaded');*/
+        this.scriptUploader = new FileUploader({ url: 'api/script', autoUpload: true, headers: headers });
+        this.importUploader = new FileUploader({ url: 'api/import', autoUpload: true, headers: headers });
+       /* this.scriptUploader.onCompleteAll = () => {
+            alert('File uploaded');
+        }*/
+        this.scriptUploader.response.subscribe(res => this.code = res);
+        this.importUploader.response.subscribe(res => this.import = res);
+>>>>>>> load-script-editor/load-script-editor
     }
 
     displayer() {
@@ -66,6 +81,10 @@ export class AppComponent implements OnInit {
 
     scriptClicked() {
         this.scriptInput.nativeElement.click();
+    }
+
+    importClicked() {
+        this.importInput.nativeElement.click();
     }
 
     fillList() {
@@ -114,5 +133,11 @@ export class AppComponent implements OnInit {
         let file = new File(this.code.split(""), "_pythonScript.py", { type: "text/plain" });
         let files = [file];
         this.scriptUploader.addToQueue(files);
+    }
+
+    uploadWrittenImport() {
+        let file = new File(this.import.split(""), "_pythonImport.py", { type: "text/plain" });
+        let files = [file];
+        this.importUploader.addToQueue(files);
     }
 }
