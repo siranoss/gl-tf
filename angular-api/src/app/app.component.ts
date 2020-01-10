@@ -43,19 +43,22 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-      this.runIndication = "Waiting for a script to run";
-      this.resultHidder = true;
-      this.errorHidder = true;
-      const headers = [{ name: 'Accept', value: 'application/json' }];
-      this.dataUploader = new FileUploader({ url: 'api/data', autoUpload: true, headers: headers });
-      /*this.dataUploader.onCompleteAll = () => alert('File uploaded');*/
-      this.scriptUploader = new FileUploader({ url: 'api/script', autoUpload: true, headers: headers });
-      this.importUploader = new FileUploader({ url: 'api/import', autoUpload: true, headers: headers });
-     /* this.scriptUploader.onCompleteAll = () => {
-          alert('File uploaded');
-      }*/
-      this.scriptUploader.response.subscribe(res => this.code = res);
-      this.importUploader.response.subscribe(res => this.import = res[0].importFile);
+        this.runIndication = "Waiting for a script to run";
+        this.resultHidder = true;
+        this.errorHidder = true;
+        const headers = [{ name: 'Accept', value: 'application/json' }];
+        this.dataUploader = new FileUploader({ url: 'api/data', autoUpload: true, headers: headers });
+        /*this.dataUploader.onCompleteAll = () => alert('File uploaded');*/
+        this.scriptUploader = new FileUploader({ url: 'api/script', autoUpload: true, headers: headers });
+        this.importUploader = new FileUploader({ url: 'api/import', autoUpload: true, headers: headers });
+        /* this.scriptUploader.onCompleteAll = () => {
+             alert('File uploaded');
+         }*/
+        this.scriptUploader.response.subscribe(res => this.code = res);
+        this.importUploader.response.subscribe(res => {
+            this.import = res;//[0].importFile;
+            console.log(res);
+        });
     }
 
     displayer() {

@@ -112,13 +112,13 @@ public class FileController {
 		}
 
 		String importFile = new String(file.getBytes());
-		obj.put("importFile", importFile);
+		/*obj.put("importFile", importFile);
 		obj.put("stdIn", stdIn);
 		obj.put("stdEr", stdErr);
 		obj.put("retType", retValue);
-		ret.put(obj);
+		ret.put(obj);*/
 
-		return ret.toString();
+		return importFile;
 	}
 
 
