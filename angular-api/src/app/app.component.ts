@@ -105,6 +105,10 @@ export class AppComponent implements OnInit {
             scriptName: script.file.name,
             dataList: this.filesToSend
         }
+        this.listFiles = [];
+        this.filesToSend = [];
+        this.dataUploader.queue = [];
+        this.scriptUploader.queue = [];
 
         console.log(jsonToPost);
         this.runScriptGetRequest.post('http://localhost:8080/api/run', jsonToPost).subscribe((response) => {
