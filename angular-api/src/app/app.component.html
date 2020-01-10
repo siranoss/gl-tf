@@ -89,10 +89,6 @@
             </div>
             <input #dataInput type="file" ng2FileSelect [uploader]="dataUploader" /><br />
 
-            <button type="button" class="btn btn-success btn-s" (click)="dataUploader.uploadAll()"
-                    [disabled]="!dataUploader.getNotUploadedItems().length">
-              Upload an Image
-            </button>
             <div>
               script : {{scriptUploader?.queue[scriptUploader?.queue?.length - 1]?.file.name}}
             </div>
@@ -102,7 +98,7 @@
                 <tbody>
                   <tr *ngFor="let item of dataUploader.queue; let i = index">
                     <td>
-                      i {{ item?.file?.name }}
+                      {{ item?.file?.name }}
                       <input type="checkbox" value="i" (click)="submitFiles(i)">
                     </td>
                   </tr>
@@ -122,10 +118,7 @@
             </div>
             <input #scriptInput type="file" ng2FileSelect [uploader]="scriptUploader" /><br />
 
-            <button type="button" class="btn btn-success btn-s" (click)="scriptUploader.uploadAll()"
-                    [disabled]="!scriptUploader.getNotUploadedItems().length">
-              Upload a Script
-            </button>
+
 
 
           </div>
