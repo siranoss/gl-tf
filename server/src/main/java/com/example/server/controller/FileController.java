@@ -27,14 +27,14 @@ public class FileController {
 	private String scriptName = null;
 
 	public void ImportDependencies(String[] dependencies) throws IOException {
-		
+
 		Process p;
 		String []cmd = { "pip", "instal", "" };
 		String s = new String();
 		String tmp;
 		for(String dependency: dependencies){
 			cmd[2] = dependency;
-			p= Runtime.getRuntime().exec(cmd);	
+			p= Runtime.getRuntime().exec(cmd);
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
@@ -91,7 +91,7 @@ public class FileController {
 		for(String dependency: dependencies){
 
 			cmd[2] = dependency;
-			p= Runtime.getRuntime().exec(cmd);	
+			p= Runtime.getRuntime().exec(cmd);
 			BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 			BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
 
@@ -128,55 +128,55 @@ public class FileController {
 			String stdEr = "";
 			String tmp;
 			System.out.println(json.scriptName);
-	
-			
+
+
 			listArgs = json.dataList;
 			args = "";
 			for (String value : listArgs) {
 				args = args + value + " ";
-	
+
 			}
 			JSONObject obj = new JSONObject();
 			JSONArray ret = new JSONArray();
-	
+
 			scriptName = json.scriptName;
-	
+
 			try {
 				int retType = 0;
 				String[] cmd = { "python", "./storage/" + scriptName, args };
 				System.out.println("python ./storage/" + scriptName + " " + args);
-	
+
 				Process p = Runtime.getRuntime().exec(cmd);
 				BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
 				BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
-	
+
 				while ((tmp = stdInput.readLine()) != null) {
 					stdIn = stdIn + "<br>" + tmp;
 					System.out.println(tmp);
 				}
-	
+
 				while ((tmp = stdError.readLine()) != null) {
 					retType = 1;
 					stdEr = stdEr + "<br>" + tmp;
 					System.out.println(tmp);
 				}
-	
+
 				obj.put("stdIn", stdIn);
 				obj.put("stdEr", stdEr);
 				obj.put("retType", retType);
-	
+
 				ret.put(obj);
-	
+
 				return ret.toString();
 			}
-	
+
 			catch (IOException e) {
 				System.out.println("exception happened - here's what I know: ");
 				e.printStackTrace();
-	
+
 			}
-	
+
 			return "An error occured, no script provided.";
-	
+
 		}
 }
