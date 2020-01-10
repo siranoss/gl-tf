@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
           alert('File uploaded');
       }*/
       this.scriptUploader.response.subscribe(res => this.code = res);
-      this.importUploader.response.subscribe(res => this.import = res);
+      this.importUploader.response.subscribe(res => this.import = res[0].importFile);
     }
 
     displayer() {

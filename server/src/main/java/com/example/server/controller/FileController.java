@@ -63,13 +63,17 @@ public class FileController {
 		fileService.storeFile(file);
 	}
 
-	@PostMapping(value = "/api/script")
-	//@CrossOrigin(origins = "http://localhost:4200")
-	@ResponseStatus(HttpStatus.OK)
-	public void handleScriptUpload(@RequestParam("file") MultipartFile file) throws IOException {
-		fileService.storeFile(file);
-		scriptName = file.getOriginalFilename();
-	}
+    @PostMapping(value = "/api/script")
+    // @CrossOrigin(origins = "http://localhost:4200")
+    @ResponseStatus(HttpStatus.OK)
+	//@CrossOrigin(origins = "*")
+    public String handleScriptUpload(@RequestParam("file") MultipartFile file) throws IOException {
+        fileService.storeFile(file);
+        scriptName = file.getOriginalFilename();
+		
+		String script = new String(file.getBytes());
+		return script;
+    }
 
 	@PostMapping(value = "/api/import")
 	//@CrossOrigin(origins = "http://localhost:4200")
@@ -107,6 +111,8 @@ public class FileController {
 			}
 		}
 
+		String importFile = new String(file.getBytes());
+		obj.put("importFile", importFile);
 		obj.put("stdIn", stdIn);
 		obj.put("stdEr", stdErr);
 		obj.put("retType", retValue);
