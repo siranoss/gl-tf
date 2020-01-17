@@ -37,7 +37,8 @@ export class AppComponent implements OnInit {
     products = [];
     fileForm: FormGroup;
     listFiles = [];
-    filesToSend = [];
+    filesToSend: Array<string> = [];
+    //filesToSend = [];
 
     constructor(private runScriptGetRequest: HttpClient) {
     }
@@ -99,7 +100,16 @@ export class AppComponent implements OnInit {
             this.fillList();
         }
         console.log("Ok " + this.listFiles[i]);
-        this.filesToSend.push(this.listFiles[i]);
+        var indexFile = this.filesToSend.indexOf(this.listFiles[i]);
+        console.log("index: " + indexFile);
+        if(indexFile == -1){
+          this.filesToSend.push(this.listFiles[i]);
+        }
+        else{
+          this.filesToSend.splice(indexFile, 1);
+        }
+        console.log(this.filesToSend.length);
+        //  this.filesToSend.push(this.listFiles[i]);
     }
 
     runScript() {
